@@ -15,6 +15,14 @@ let timer = () => {
     displayTimeLeft(countdown);
 };
 
+let displayTimeLeft = timeLeft => {
+    const minutes = Math.floor(timeLeft / 60);
+    const secondsLeft = timeLeft % 60;
+    const display = `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
+    document.title = display;
+    displayTimer.textContent = display;
+};
+
 timerButton.addEventListener('click', () => {
     setInterval(timer, 1000);
 });
