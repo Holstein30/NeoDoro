@@ -1,7 +1,7 @@
 // JS
 
 // Variables
-let countdown = 10;
+let countdown = 1500;
 const displayTimer = document.querySelector('.display__time-left');
 const timerButton = document.querySelector('.timer__button');
 
