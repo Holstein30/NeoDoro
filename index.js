@@ -1,18 +1,26 @@
 // JS
 
 // Variables
-let countdown = 1500;
+let countdown;
 const displayTimer = document.querySelector('.display__time-left');
 const timerButton = document.querySelector('.timer__button');
 
 let timer = () => {
-    if (countdown === 0) {
-        countdown = 0;
-        clearInterval();
-        return;
-    }
-    countdown--;
-    displayTimeLeft(countdown);
+    clearInterval(countdown);
+
+    const now = Date.now();
+    const then = now + 1500 * 1000;
+
+    countdown = setInterval(() => {
+        let secondsLeft = Math.round((then - Date.now()) / 1000);
+        // check if we should stop it!
+        if (secondsLeft < 0) {
+            clearInterval(countdown);
+            return;
+        }
+        // display it
+        displayTimeLeft(secondsLeft);
+    }, 1000);
 };
 
 let displayTimeLeft = timeLeft => {
@@ -23,6 +31,7 @@ let displayTimeLeft = timeLeft => {
     displayTimer.textContent = display;
 };
 
-timerButton.addEventListener('click', () => {
-    setInterval(timer, 1000);
+timerButton.addEventListener('click', e => {
+    e.preventDefault();
+    timer();
 });
