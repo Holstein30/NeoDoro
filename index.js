@@ -12,7 +12,7 @@ let timer = () => {
         return;
     }
     countdown--;
-    displayTimer.textContent = countdown;
+    displayTimeLeft(countdown);
 };
 
 timerButton.addEventListener('click', () => {
