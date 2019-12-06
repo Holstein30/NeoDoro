@@ -3,6 +3,7 @@
 // Variables
 let countdown;
 const displayTimer = document.querySelector('.display__time-left');
+const timerControls = document.querySelector('.timer__controls');
 const timerButton = document.querySelector('.timer__button');
 
 let timer = () => {
@@ -31,7 +32,7 @@ let displayTimeLeft = timeLeft => {
     displayTimer.textContent = display;
 };
 
-timerButton.addEventListener('click', e => {
+timerControls.addEventListener('click', e => {
     e.preventDefault();
     timer();
 });
