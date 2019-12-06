@@ -6,7 +6,7 @@ const displayTimer = document.querySelector('.display__time-left');
 const timerControls = document.querySelector('.timer__controls');
 const timerButton = document.querySelector('.timer__button');
 
-let timer = () => {
+let timer = stop => {
     clearInterval(countdown);
 
     const now = Date.now();
@@ -34,5 +34,7 @@ let displayTimeLeft = timeLeft => {
 
 timerControls.addEventListener('click', e => {
     e.preventDefault();
+    displayTimer.textContent = '25:00';
+    timerButton.textContent = 'RESET';
     timer();
 });
