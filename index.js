@@ -14,11 +14,13 @@ let timer = stop => {
     console.log(counter);
     const now = Date.now();
     let then;
+    let shorts;
     if (counter % 2 === 0) {
         then = now + 15 * 1000;
-    } else if (counter % 4 === 0) {
+    } else if (shorts % 4 === 0) {
         then = now + 10 * 1000;
     } else {
+        shorts++;
         then = now + 5 * 1000;
     }
 
