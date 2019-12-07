@@ -1,7 +1,10 @@
 // JS
 
+// add a counter so that when 1 pomodoro starts it will keep track of if short or long break is next
+
 // Variables
 let countdown;
+let counter;
 const displayTimer = document.querySelector('.display__time-left');
 const timerControls = document.querySelector('.timer__controls');
 const timerButton = document.querySelector('.timer__button');
@@ -17,6 +20,7 @@ let timer = stop => {
         // check if we should stop it!
         if (secondsLeft < 0) {
             clearInterval(countdown);
+            counter++;
             return;
         }
         // display it
