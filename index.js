@@ -2,14 +2,22 @@
 
 // Variables
 let countdown;
-let time = 1500;
+let time = 5;
 const displayTimer = document.querySelector('.display__time-left');
 const timerControls = document.querySelector('.timer__controls');
 const timerButton = document.querySelector('.timer__button');
 
 let timer = () => {
+    clearInterval(countdown);
+
     countdown = setInterval(() => {
-        time--;
+        if (time === 0) {
+            alert('HOWDY');
+            clearInterval(countdown);
+        } else {
+            time--;
+        }
+
         displayTimeLeft(time);
     }, 1000);
 };
