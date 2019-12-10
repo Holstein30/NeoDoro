@@ -2,38 +2,15 @@
 
 // Variables
 let countdown;
-let shorts = 0;
-let counter = 0;
+let time = 1500;
 const displayTimer = document.querySelector('.display__time-left');
 const timerControls = document.querySelector('.timer__controls');
 const timerButton = document.querySelector('.timer__button');
 
-let timer = stop => {
-    clearInterval(countdown);
-    console.log(counter);
-    console.log(shorts);
-    const now = Date.now();
-    let then;
-    if (counter % 2 === 0) {
-        then = now + 3 * 1000;
-    } else if (shorts != 0 && shorts % 4 === 0) {
-        then = now + 10 * 1000;
-    } else {
-        shorts++;
-        then = now + 2 * 1000;
-    }
-
+let timer = () => {
     countdown = setInterval(() => {
-        let secondsLeft = Math.round((then - Date.now()) / 1000);
-        // check if we should stop it!
-        if (secondsLeft < 0) {
-            clearInterval(countdown);
-            counter++;
-            timer();
-            return;
-        }
-        // display it
-        displayTimeLeft(secondsLeft);
+        time--;
+        displayTimeLeft(time);
     }, 1000);
 };
 
