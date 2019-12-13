@@ -3,36 +3,50 @@
 // Variables
 let countdown;
 let time = 5;
-const displayTimer = document.querySelector('.display__time-left');
-const timerControls = document.querySelector('.timer__controls');
-const timerButton = document.querySelector('.timer__button');
+const displayTimer = document.querySelector(".display__time-left");
+const timerControls = document.querySelector(".timer__controls");
+const timerButton = document.querySelector(".timer__button");
 
-let timer = () => {
-    clearInterval(countdown);
+let timer = seconds => {
+  clearInterval(countdown);
 
-    countdown = setInterval(() => {
-        if (time === 0) {
-            alert('HOWDY');
-            clearInterval(countdown);
-        } else {
-            time--;
-        }
+  const now = Date.now();
+  const then = now + seconds * 1000;
+  displayTimeLeft(seconds);
+  displayEndTime(then);
 
-        displayTimeLeft(time);
-    }, 1000);
+  countdown = setInterval(() => {
+    const secondsLeft = Math.round((then - Date.now()) / 1000);
+
+    if (secondsLeft < 0) {
+      clearInterval(countdown);
+      return;
+    }
+
+    displayTimeLeft(secondsLeft);
+  }, 1000);
 };
 
-let displayTimeLeft = timeLeft => {
-    const minutes = Math.floor(timeLeft / 60);
-    const secondsLeft = timeLeft % 60;
-    const display = `${minutes}:${secondsLeft < 10 ? '0' : ''}${secondsLeft}`;
-    document.title = display;
-    displayTimer.textContent = display;
+let displayTimeLeft = secondsLeft => {
+  const minutes = Math.floor(secondsLeft / 60);
+  const remainderSeconds = secondsLeft % 60;
+  const display = `${minutes}:${
+    remainderSeconds < 10 ? "0" : ""
+  }${remainderSeconds}`;
+  document.title = display;
+  displayTimer.textContent = display;
 };
 
-timerControls.addEventListener('click', e => {
-    e.preventDefault();
-    displayTimer.textContent = '25:00';
-    timerButton.textContent = 'RESET';
-    timer();
+function startTimer() {
+  const seconds = parseInt(this.dataset.time);
+  timer(seconds);
+}
+
+buttons.forEach(button => button.addEventListener("click", startTimer));
+
+timerControls.addEventListener("click", e => {
+  e.preventDefault();
+  displayTimer.textContent = "25:00";
+  timerButton.textContent = "RESET";
+  timer();
 });
